@@ -1,0 +1,4 @@
+thongndd 0
+thongncc 1
+thongnbb 1
+nhinht 0
