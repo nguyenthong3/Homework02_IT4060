@@ -9,14 +9,21 @@
 
 using namespace std;
 
-/* Struct user define a user in.txt file
+/*------------------------------------ 
+Struct user define a user in.txt file
 username: username to login
-status: 0 is active, 1 is no active */
+status: 0 is active, 1 is no active 
+*------------------------------------*/
 typedef struct {
 	string username;
 	int status;
 } user;
 
+/*------Func getUsername-------------
+* To get Username in account.txt
+* INPUT: a line in file accout.txt
+* OUTPUT: username (string)
+*------------------------------------*/
 string getUsername(string str) {
 	char res[2][20];
 	char tmp[20] = "";
@@ -42,6 +49,12 @@ string getUsername(string str) {
 	return res[0];
 }
 
+
+/*-------Func getStatus------------------
+* to Get Status of a user in account.txt
+* INPUT: a string line in account.txt
+* OUTPUT: status (int) of this user
+*---------------------------------------*/
 int getStatus(string str) {
 	int len = str.length();
 	char x[2];
