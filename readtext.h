@@ -1,9 +1,7 @@
 ﻿#pragma once
-#include <iostream>
+#include "stdafx.h"
 #include <string>
-#include <cstring>
 #include <fstream>
-#include <vector>
 
 #pragma warning (disable : 4996)
 
