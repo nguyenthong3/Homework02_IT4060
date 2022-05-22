@@ -1,6 +1,4 @@
-﻿#include "stdio.h"
-#include "conio.h"
-#include "string.h"
+﻿#include "stdafx.h"
 #include "ws2tcpip.h"
 #include "winsock2.h"
 #include "readtext.h"
