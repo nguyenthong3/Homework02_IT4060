@@ -2,6 +2,7 @@
 #include "ws2tcpip.h"
 #include "winsock2.h"
 #include "readtext.h"
+#include "handresp.h"
 
 #define SERVER_PORT 5500
 #define SERVER_ADDR "127.0.0.1"
@@ -44,11 +45,11 @@
 
 int main(int argc, char* argv[])
 {
-	//Check input cmd [Filename.exe PortNumber]
-	if (argc != 2 || atoi(argv[1]) < 49152 || atoi(argv[1]) > 65535) {
-		cout << "Error input (notice: Port must in [49152;65535])" << endl;
-		return 0;
-	}
+	////Check input cmd [Filename.exe PortNumber]
+	//if (argc != 2 || atoi(argv[1]) < 49152 || atoi(argv[1]) > 65535) {
+	//	cout << "Error input (notice: Port must in [49152;65535])" << endl;
+	//	return 0;
+	//}
 
 	//step 1: Init Winsock
 	WSADATA wsaDATA;
@@ -93,6 +94,10 @@ int main(int argc, char* argv[])
 
 	cout << "Server started!" << endl;
 
+	cout << "----- List user and status ------" << endl;
+	listUser();
+	cout << "---------------------------------" << endl;
+
 	//Step 5: Communicate with client
 	sockaddr_in clientAddr;
 	char buff[BUFF_SIZE];
@@ -133,7 +138,7 @@ int main(int argc, char* argv[])
 
 			}
 			else if (ret == 0) {
-				printf("Client disconnects");
+				printf("Client disconnects\n");
 				closesocket(client[i]);
 				client[i] = 0;
 			}
@@ -141,9 +146,17 @@ int main(int argc, char* argv[])
 				buff[ret] = 0;
 				printf("Receive from client[%s:%d] %s\n",
 					inet_ntoa(clientAddr.sin_addr), ntohs(clientAddr.sin_port), buff);
+				string str(buff);
+				string res = getService(str);
+				int n = res.length();
+
+				buff[n] = '\0';
+
+				strcpy(buff, res.c_str());
+
 
 				//Echo to client
-				ret = send(client[i], buff, strlen(buff), 0);
+				ret = send(client[i],buff, strlen(buff), 0);
 				if (ret == SOCKET_ERROR) {
 					if (WSAGetLastError() != WSAEWOULDBLOCK) {
 						printf("Error %d: Cannot send data\n", WSAGetLastError());

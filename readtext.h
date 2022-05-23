@@ -62,6 +62,9 @@ int getStatus(string str) {
 	return result;
 }
 
+/*-------
+
+*/
 int findUser(string username) {
 	fstream file;
 	file.open("account.txt", ios::in);
