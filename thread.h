@@ -5,12 +5,21 @@
 
 using namespace std;
 
+/*------------------- Struct session --------------------
+* string clientAddr: Address want to connect with server
+* bool isLogin: status of account
+* string username: account that request from address
+*/
 typedef struct {
 	string clientAddr;
 	bool isLogin;
 	string username;
 } session;
 
+/* Func getAddr: To convert sockaddr_in to string
+* [INPUT] sockaddr_in addr: address of client
+* [OUTPUT] string fullAddr: address of client by string
+*/
 string getAddr(sockaddr_in& addr) {
 	char IPAddrStr[22];
 	inet_ntop(AF_INET, &addr.sin_addr, IPAddrStr, 22);

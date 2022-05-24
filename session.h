@@ -13,6 +13,11 @@ void writeLog(string log) {
 	f.close();
 }
 
+/*------------------ Func getSessionAddr ---------------------
+* To get client's logged in address in a session
+* [INPUT] line: a line in session.txt file
+* [OUTPUT] string: client's logged in address
+*/
 string getSessionAddr(string line) {
 	char tmp[22] = "";
 	char currentChar[2];
@@ -26,6 +31,11 @@ string getSessionAddr(string line) {
 	return tmp;
 }
 
+/*------------------ Func getSessionIsLogin ---------------------
+* To get client's logged in status
+* [INPUT] line: a line in session.txt file
+* [OUTPUT] string: client's logged in status
+*/
 int getSessionIsLogin(string line) {
 	int i = 0;
 	int res;
@@ -39,6 +49,11 @@ int getSessionIsLogin(string line) {
 	return res-48;
 }
 
+/*------------------ Func getSessionAddr ---------------------
+* To get client's logged in username in a session
+* [INPUT] line: a line in session.txt file
+* [OUTPUT] string: client's logged in username
+*/
 string getSessionUsername(string line) {
 	char tmp[20] = "";
 	char currentChar[2];
@@ -60,6 +75,11 @@ string getSessionUsername(string line) {
 	return tmp;
 }
 
+/*------------------ Func getPresentSessionUsername ---------------------
+* To get client's logged in username in a session
+* [INPUT] line: a line in session.txt file
+* [OUTPUT] string: client's logged in username
+*/
 string getPresentSessionUsername(string addr) {
 	string username;
 	fstream s;
@@ -75,6 +95,13 @@ string getPresentSessionUsername(string addr) {
 	return username;
 }
 
+/*------------------ Func checkSession ---------------------
+* To know that client has logged in yet
+* [INPUT] username: username to check
+* [OUTPUT] 1: if Account is logged in
+*		   2: if Account is not logged in
+*		   99: if Account is not found
+*/
 int checkSession(string username) {
 	fstream file;
 	file.open("session.txt", ios::in);
@@ -90,8 +117,15 @@ int checkSession(string username) {
 		}
 		file.close();
 	}
+	return 99;
 }
 
+/*------------------ Func updateStatus ---------------------
+* [VOID] To update status of account in session
+* [INPUT] string addr: Address where account try to log in
+*		  int status: status want to set (0: logged out, 1: logged in
+*		  string username: username of Account want to set
+*/
 void updateStatus(string addr, int status, string username) {
 	session userSession[4];
 	int i = 0;

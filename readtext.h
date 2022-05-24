@@ -106,6 +106,7 @@ void listUser() {
 	file.close();
 }
 
+/* time format : [24/05/2022 15:41:54]*/
 string getCurrentTime() {
 	string s;
 	time_t tnow = time(0);

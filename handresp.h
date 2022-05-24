@@ -7,6 +7,14 @@
 
 using namespace std;
 
+/*------------------ Func HandleLogin ---------------------
+* To packaging response that send to Client's Login request
+* [INPUT] request from Client
+* [OUTPUT] 0: Successfully!
+*		   11: Account Locked!
+*		   12: Not found account!
+*		   13: Account is logged in another client!
+*/	
 int handleLogin(string request) {
 	int reqLen = request.length();
 	char tmp[20] = "";
@@ -31,6 +39,13 @@ int handleLogin(string request) {
 	return findUser(str);
 }
 
+/*------------------ Func HandlePost ---------------------
+* To packaging response that send to Client's Post request
+* [INPUT] username: account that logged in client address!
+*		  request: from Client!
+* [OUTPUT] 20: Successfully!
+*		   21: Must log in first!
+*/
 int handlePost(string username, string request) {
 	if (checkSession(username) == 2) {
 		int reqLen = request.length();
@@ -58,6 +73,12 @@ int handlePost(string username, string request) {
 	}
 }
 
+/*------------------ Func HandleLogout ---------------------
+* To packaging response that send to Client's Logout request
+* [INPUT] username: account that logged in client address!
+* [OUTPUT] 30: Successfully!
+*		   21: Must log in first!
+*/
 int handleLogout(string username) {
 	if (checkSession(username) == 2 && username.length() > 0) {
 		updateStatus("0.0.0.0", 0, username);
@@ -68,6 +89,12 @@ int handleLogout(string username) {
 	}
 }
 
+/*----------------------- Func getService -----------------------------
+* To handle request from client and send response!
+* [INPUT] string clientAddr: client address send request!
+*		  username: account that logged in client address!
+* [OUTPUT] (string) handle service what client want and send message!
+*/
 string getService(string clientAddr, string request) {
 	int reqLen = request.length();
 	char tmp[7] = "";
