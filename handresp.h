@@ -1,6 +1,6 @@
 #pragma once
 #include "stdafx.h"
-#include "log.h"
+#include "session.h"
 #include "readtext.h"
 
 using namespace std;
