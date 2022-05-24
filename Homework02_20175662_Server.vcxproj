@@ -142,11 +142,18 @@
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="handreq.h" />
+    <ClInclude Include="handresp.h" />
+    <ClInclude Include="session.h" />
     <ClInclude Include="readtext.h" />
     <ClInclude Include="stdafx.h" />
+    <ClInclude Include="thread.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="account.txt" />
+    <Text Include="article.txt" />
+    <Text Include="log.txt" />
+    <Text Include="session.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
