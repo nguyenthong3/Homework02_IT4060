@@ -60,6 +60,21 @@ string getSessionUsername(string line) {
 	return tmp;
 }
 
+string getPresentSessionUsername(string addr) {
+	string username;
+	fstream s;
+	s.open("session.txt", ios::in);
+	if (s.is_open()) {
+		string line;
+		while (getline(s, line)) {
+			if (getSessionAddr(line).compare(addr) == 0) {
+				username = getSessionUsername(line);
+			}
+		}
+	}
+	return username;
+}
+
 int checkSession(string username) {
 	fstream file;
 	file.open("session.txt", ios::in);

@@ -5,6 +5,7 @@
 #include "handresp.h"
 #include "session.h"
 #include "thread.h"
+#include "handreq.h"
 
 #define SERVER_PORT 5500
 #define SERVER_ADDR "127.0.0.1"
@@ -141,6 +142,7 @@ int main(int argc, char* argv[])
 			}
 			else if (ret == 0) {
 				printf("Client disconnects\n");
+				// set session here
 				closesocket(client[i]);
 				client[i] = 0;
 			}
@@ -151,7 +153,7 @@ int main(int argc, char* argv[])
 				string str(buff);
 				string fullAddr = getAddr(clientAddr);
 				cout << fullAddr << endl;
-				string res = getService(fullAddr,str);
+				string res = getService(fullAddr, str);
 				int n = res.length();
 				buff[n] = '\0';
 				strcpy(buff, res.c_str());

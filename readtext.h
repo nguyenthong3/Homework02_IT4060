@@ -2,22 +2,23 @@
 #include "stdafx.h"
 #include <string>
 #include <fstream>
+#include <ctime>
 
 #pragma warning (disable : 4996)
 
 using namespace std;
 
 /*------------------------------------ 
-Struct user define a user in.txt file
-username: username to login
-status: 0 is active, 1 is no active 
+* Struct user define a user in.txt file
+* username: username to login
+* status: 0 is active, 1 is no active 
 *------------------------------------*/
 typedef struct {
 	string username;
 	int status;
 } user;
 
-/*------Func getUsername-------------
+/*--------Func getUsername-------------
 * To get Username in account.txt
 * INPUT: a line in file accout.txt
 * OUTPUT: username (string)
@@ -101,6 +102,29 @@ void listUser() {
 		while (getline(file, optionalUsername)) {
 			cout << optionalUsername << endl;
 		}
-		file.close();
 	}
+	file.close();
+}
+
+string getCurrentTime() {
+	string s;
+	time_t tnow = time(0);
+	tm* logtime = new tm;
+	localtime_s(logtime, &tnow);
+	//create string contain current time
+	s.append("[");
+	s.append(to_string(logtime->tm_mday));
+	s.append("/");
+	s.append(to_string(logtime->tm_mon + 1));
+	s.append("/");
+	s.append(to_string(logtime->tm_year + 1900));
+	s.append(" ");
+	s.append(to_string(logtime->tm_hour));
+	s.append(":");
+	s.append(to_string(logtime->tm_min));
+	s.append(":");
+	s.append(to_string(logtime->tm_sec));
+	s.append("]");
+	delete(logtime);
+	return s;
 }
