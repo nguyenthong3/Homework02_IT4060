@@ -58,8 +58,14 @@ int handlePost(string username, string request) {
 	}
 }
 
-int handleLogout(string request) {
-	return 1;
+int handleLogout(string username) {
+	if (checkSession(username) == 2 && username.length() > 0) {
+		updateStatus("0.0.0.0", 0, username);
+		return 30;
+	}
+	else {
+		return 21;
+	}
 }
 
 string getService(string clientAddr, string request) {
@@ -68,12 +74,12 @@ string getService(string clientAddr, string request) {
 	char currentChar[2];
 	currentChar[1] = '\0';
 	int i = 0;
-	while ((char)request[i] - ' ' != 0) {
+	
+	while ((char)request[i] - ' ' != 0 && i < reqLen) {
 		currentChar[0] = request[i];
 		strcat(tmp, currentChar);
 		i++;
 	}
-
 
 	string str(tmp);
 	cout << "Service name: " << str << endl;
@@ -125,7 +131,12 @@ string getService(string clientAddr, string request) {
 	}
 
 	if (str.compare("BYE") == 0) {
-		switch (handleLogout(request))
+		string username = getPresentSessionUsername(clientAddr);
+		if (username.length() == 1) {
+			return "21 You must log in to log out =))) !";
+		}
+		int bye = handleLogout(username);
+		switch (bye)
 		{
 			case 30:
 				return "30 Log out success!";
