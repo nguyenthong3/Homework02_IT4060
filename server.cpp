@@ -3,6 +3,8 @@
 #include "winsock2.h"
 #include "readtext.h"
 #include "handresp.h"
+#include "session.h"
+#include "thread.h"
 
 #define SERVER_PORT 5500
 #define SERVER_ADDR "127.0.0.1"
@@ -147,13 +149,12 @@ int main(int argc, char* argv[])
 				printf("Receive from client[%s:%d] %s\n",
 					inet_ntoa(clientAddr.sin_addr), ntohs(clientAddr.sin_port), buff);
 				string str(buff);
-				string res = getService(str);
+				string fullAddr = getAddr(clientAddr);
+				cout << fullAddr << endl;
+				string res = getService(fullAddr,str);
 				int n = res.length();
-
 				buff[n] = '\0';
-
 				strcpy(buff, res.c_str());
-
 
 				//Echo to client
 				ret = send(client[i],buff, strlen(buff), 0);

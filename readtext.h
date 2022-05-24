@@ -62,9 +62,12 @@ int getStatus(string str) {
 	return result;
 }
 
-/*-------
-
-*/
+/*-------Find Username in .txt file----------
+[INPUT] string username
+[OUTPUT] 0 if find an equals username
+		 11 if this username has been locked
+		 12 if don't find an equals username
+*---------------------------------------------*/
 int findUser(string username) {
 	fstream file;
 	file.open("account.txt", ios::in);
@@ -87,6 +90,9 @@ int findUser(string username) {
 	return 12;
 }
 
+/*------- Func listUser() ----------
+* Print list of username and status
+*------------------------------------*/
 void listUser() {
 	fstream file;
 	file.open("account.txt", ios::in);
