@@ -1,6 +1,7 @@
 #pragma once
 #include "stdafx.h"
 #include "thread.h"
+#include "readtext.h"
 
 using namespace std;
 
@@ -127,7 +128,8 @@ int checkSession(string username) {
 *		  string username: username of Account want to set
 */
 void updateStatus(string addr, int status, string username) {
-	session userSession[4];
+	int cUser = countUser();
+	session userSession[1000];
 	int i = 0;
 	fstream file;
 	file.open("session.txt", ios::in);
@@ -142,7 +144,7 @@ void updateStatus(string addr, int status, string username) {
 	}
 	file.close();
 
-	for (int c = 0; c < 4; c++) {
+	for (int c = 0; c < cUser; c++) {
 		if (userSession[c].username.compare(username) == 0) {
 			userSession[c].clientAddr = addr;
 			userSession[c].isLogin = status;
@@ -154,7 +156,7 @@ void updateStatus(string addr, int status, string username) {
 
 	if (file.is_open()) {
 		int j = 0;
-		while (j < 4) {
+		while (j < cUser) {
 			file << userSession[j].clientAddr << " " << userSession[j].isLogin << " " << userSession[j].username << "\n";
 			j++;
 		}

@@ -2,6 +2,9 @@
 #include "stdafx.h"
 #include <WinSock2.h>
 #include <WS2tcpip.h>
+#include <vector>
+
+#define BUFF_SIZE 2048
 
 using namespace std;
 
@@ -15,6 +18,12 @@ typedef struct {
 	bool isLogin;
 	string username;
 } session;
+
+struct threadinfo {
+	SOCKET sock;
+	string clientInfor;
+};
+
 
 /* Func getAddr: To convert sockaddr_in to string
 * [INPUT] sockaddr_in addr: address of client

@@ -106,6 +106,20 @@ void listUser() {
 	file.close();
 }
 
+unsigned int countUser() {
+	unsigned int cnt = 0;
+	fstream file;
+	file.open("account.txt", ios::in);
+	if (file.is_open()) {
+		string line;
+		while (getline(file, line)) {
+			cnt++;
+		}
+	}
+	file.close();
+	return cnt;
+}
+
 /* time format : [24/05/2022 15:41:54]*/
 string getCurrentTime() {
 	string s;
